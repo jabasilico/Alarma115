@@ -57,3 +57,7 @@ tr:hover {
   background-color: #e6e6e6;
 }
 
+.header-row {
+  background-color: #ccc;
+  font-weight: bold;
+}
