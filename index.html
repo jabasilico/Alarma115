@@ -42,6 +42,7 @@
       var table = document.getElementById("contactsTable");
       table.innerHTML = ""; // Limpiar la tabla antes de mostrar los nuevos datos
 
+      var headerRow = document.createElement("tr");
       for (var i = 0; i < jsonData.length; i++) {
         var row = jsonData[i];
         var newRow = table.insertRow();
