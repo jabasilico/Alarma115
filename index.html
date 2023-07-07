@@ -3,12 +3,11 @@
 <head>
   <title>Listado de Vecinos - ALARMA CALLE 115</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="xlsx.core.min.js"></script>
   <script src="script.js"></script>
 </head>
 <body>
   <h1>Listado de Vecinos - ALARMA CALLE 115</h1>
-
-  <input type="text" id="searchInput" onkeyup="searchContacts()" placeholder="Buscar por nombre...">
 
   <table id="contactsTable">
     <tr>
@@ -17,18 +16,37 @@
       <th>Teléfono</th>
       <th>Domicilio</th>
     </tr>
-    <tr>
-      <td>50</td>
-      <td>Jorge y Anahi</td>
-      <td>221-5364308</td>
-      <td>115 Nro.1385</td>
-    </tr>
-    <tr>
-      <td>51</td>
-      <td>Sabrina Bugallo</td>
-      <td>221-5225126</td>
-      <td>115 Nro.1384</td>
-    </tr>
   </table>
+
+  <script>
+    var file = "ListaVecinos.xlsx"; // Nombre del archivo Excel en la carpeta del HTML
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", file, true);
+    xhr.responseType = "arraybuffer";
+
+    xhr.onload = function(e) {
+      var data = new Uint8Array(xhr.response);
+      var workbook = XLSX.read(data, { type: 'array' });
+      var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+      var table = document.getElementById("contactsTable");
+      table.innerHTML = ""; // Limpiar la tabla antes de mostrar los nuevos datos
+
+      for (var i = 0; i < jsonData.length; i++) {
+        var row = jsonData[i];
+        var newRow = table.insertRow();
+
+        for (var j = 0; j < row.length; j++) {
+          var cell = newRow.insertCell();
+          cell.innerHTML = row[j];
+        }
+      }
+    };
+
+    xhr.send();
+  </script>
+  
 </body>
 </html>
