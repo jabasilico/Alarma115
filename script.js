@@ -43,6 +43,7 @@ function searchContactsByName() {
   }
 }
 
+
 function goToLogPage() {
   window.location.href = "log.html";
 }
