@@ -44,9 +44,10 @@ function searchContactsByName() {
 }
 
 function goToLogPage() {
-  window.location.href = "Log.html";
+  window.location.href = "log.html";
 }
 
 function goBack() {
   history.back();
 }
+
