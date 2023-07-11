@@ -42,3 +42,11 @@ function searchContactsByName() {
     }
   }
 }
+
+function goToLogPage() {
+  window.location.href = "Log.html";
+}
+
+function goBack() {
+  history.back();
+}
